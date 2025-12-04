@@ -12,7 +12,7 @@ The goal is to demonstrate how to:
 
 ---
 
-## 1. Project Structure (English)
+## 1. Project Structure 
 
 - `Postman collection.json`  
   Postman collection that contains all requests for the assignment.  
@@ -56,7 +56,7 @@ The goal is to demonstrate how to:
 
 ---
 
-## 3. Setup (English)
+## 3. Setup 
 
 ### 3.1 Import the Environment
 
@@ -103,7 +103,7 @@ The goal is to demonstrate how to:
    - The API key is valid
    - The Gemini API is reachable
 
-### Option C – Use a Monitor (Optional)
+### Option C – Use a Monitor 
 
 You can also configure a Postman Monitor to run this collection on a schedule  
 (e.g. hourly or daily) to observe LLM behavior over time.

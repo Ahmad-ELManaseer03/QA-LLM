@@ -1,0 +1,46 @@
+{
+	"id": "91296342-b7cc-45d5-b82a-56cd1362ab67",
+	"name": "QA-Gemini",
+	"values": [
+		{
+			"key": "GEMINI_API_KEY",
+			"value": "AIzaSyAo87JK66HAJil4SUWcjywRn5MJOChVDl4",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "model_answer_1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "q1_answer",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "model_answer_2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "q2_answer_escaped",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "q2_answer",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"color": null,
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-11-25T13:50:43.814Z",
+	"_postman_exported_using": "Postman/11.73.1"
+}

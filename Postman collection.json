@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "01626d71-7b93-4de3-baa0-a9fe089334fd",
+		"name": "QA LLM Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48686356",
+		"_collection_link": "https://ahmad1manaseer-61442.postman.co/workspace/Ahmad-Ghazi-EL-Manaseer's-Works~1991d06e-f9dd-4d86-8cb4-20824e17e2bd/collection/48686356-01626d71-7b93-4de3-baa0-a9fe089334fd?action=share&source=collection_link&creator=48686356"
+	},
+	"item": [
+		{
+			"name": "Prompt 1",
+			"item": [
+				{
+					"name": "Ask Question 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has candidates\", function () {\r",
+									"    let jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.candidates.length).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"let answer = pm.response.json().candidates[0].content.parts[0].text;\r",
+									"pm.environment.set(\"model_answer_1\", answer);\r",
+									"\r",
+									"pm.test(\"Answer is not empty\", function () {\r",
+									"    pm.expect(answer.length).to.be.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:gemini-api:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "GEMINI_API_KEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"contents\": [\r\n    {\r\n      \"parts\": [\r\n        {\r\n          \"text\": \"Which city is the capital of the country where the Eiffel Tower is located?\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{GEMINI_API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-2.0-flash:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{GEMINI_API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evaluator 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let res = pm.response.json();\r",
+									"\r",
+									"let answer =\r",
+									"    res?.candidates?.[0]?.content?.parts?.[0]?.text ||\r",
+									"    res?.output_text ||\r",
+									"    JSON.stringify(res);\r",
+									"\r",
+									"pm.environment.set(\"q1_answer\", answer);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Answer is not empty\", function () {\r",
+									"    pm.expect(answer.length).to.be.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:gemini-api:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "GEMINI_API_KEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contents\": [\r\n    {\r\n      \"parts\": [\r\n        {\r\n          \"text\": \"Evaluate this answer: {{model_answer_1}}. Respond only with PASS or FAIL.\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{GEMINI_API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-2.0-flash:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{GEMINI_API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prompt 2",
+			"item": [
+				{
+					"name": "Ask Question 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let res = pm.response.json();\r",
+									"let answer = res?.candidates?.[0]?.content?.parts?.[0]?.text || res?.output_text || JSON.stringify(res);\r",
+									"\r",
+									"let escaped_answer = answer.replace(/\\\\/g, \"\\\\\\\\\")\r",
+									"                           .replace(/\"/g, '\\\\\"')\r",
+									"                           .replace(/\\n/g, \"\\\\n\");\r",
+									"\r",
+									"pm.environment.set(\"model_answer_2\", answer);        // الجواب الأصلي\r",
+									"pm.environment.set(\"q2_answer_escaped\", escaped_answer);  // النسخة المهربة للاستخدام في Evaluator\r",
+									"console.log(\"Q2 Answer stored:\", escaped_answer);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Answer is not empty\", function () {\r",
+									"    pm.expect(answer.length).to.be.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:gemini-api:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "GEMINI_API_KEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contents\": [\r\n    {\r\n      \"parts\": [\r\n        {\r\n          \"text\": \"Tell me a story of an animal that has ears in shape of a triangle and does meow.\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{GEMINI_API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-2.0-flash:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{GEMINI_API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evaluator 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let res = pm.response.json();\r",
+									"\r",
+									"let answer =\r",
+									"    res?.candidates?.[0]?.content?.parts?.[0]?.text ||\r",
+									"    res?.output_text ||\r",
+									"    JSON.stringify(res);\r",
+									"\r",
+									"pm.environment.set(\"q2_answer\", answer);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Answer is not empty\", function () {\r",
+									"    pm.expect(answer.length).to.be.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:gemini-api:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "GEMINI_API_KEY",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contents\": [\r\n    {\r\n      \"parts\": [\r\n        {\r\n          \"text\": \"Evaluate this answer: {{q2_answer_escaped}}. Respond only with PASS or FAIL.\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{GEMINI_API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-2.0-flash:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{GEMINI_API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GEMINI_API_KEY",
+			"value": ""
+		},
+		{
+			"key": "model_answer_1",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "eval_1",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "model_answer_2",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "eval_2",
+			"value": "",
+			"disabled": true
+		}
+	]
+}

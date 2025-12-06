@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "GEMINI_API_KEY",
-			"value": "AIzaSyAo87JK66HAJil4SUWcjywRn5MJOChVDl4",
+			"value": "",
 			"type": "default",
 			"enabled": true
 		},

@@ -1,165 +1,230 @@
+# 🤖 LLM QA Automation Framework
+
+> إطار عمل لأتمتة اختبار جودة مخرجات نماذج اللغة الكبيرة (LLM) باستخدام Postman و Google Gemini API
+
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)](https://www.postman.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Gemini](https://img.shields.io/badge/Google_Gemini-4285F4?style=flat&logo=google&logoColor=white)](https://ai.google.dev/)
+
+---
+
+## 📖 نظرة عامة
+
+هذا المشروع يوفر حلاً تلقائياً لاختبار استجابات نماذج الذكاء الاصطناعي (LLM) من خلال:
+
+- ✅ إرسال استعلامات محددة مسبقاً
+- ✅ تخزين الإجابات تلقائياً
+- ✅ تقييم الإجابات باستخدام النموذج نفسه
+- ✅ تحديد النتيجة: **PASS** أو **FAIL**
+
+---
+
+## 🎯 لماذا هذا المشروع؟
+
+في عصر الذكاء الاصطناعي، نحتاج لطرق موثوقة لاختبار جودة مخرجات نماذج اللغة. هذا المشروع يوفر:
+
+- **الأتمتة الكاملة:** لا حاجة للاختبار اليدوي
+- **القابلية للتكرار:** نفس الاختبار بنفس الدقة في كل مرة
+- **القياس الموضوعي:** استخدام AI لتقييم AI
+- **سهولة التوسع:** إضافة اختبارات جديدة بسهولة
+
+---
+
+## 🚀 البدء السريع
+
+### المتطلبات الأساسية
+
+- [Postman](https://www.postman.com/downloads/) (Desktop أو Web)
+- حساب [Google Gemini API](https://ai.google.dev/) مع API Key
+- معرفة أساسية بـ Postman و APIs
+
+### خطوات التثبيت
+
+#### 1. استنساخ المشروع
+
+```bash
+git clone https://github.com/Ahmad-ELManaseer03/QA-LLM.git
+cd QA-LLM
+```
+
+#### 2. استيراد Environment
+
+1. افتح Postman
+2. اذهب إلى **Environments** → **Import**
+3. اختر الملف `environment.json`
+4. أضف `GEMINI_API_KEY` في حقل **Current Value**
+5. احفظ واختر الـ Environment
+
+#### 3. استيراد Collection
+
+1. اذهب إلى **Collections** → **Import**
+2. اختر الملف `Postman collection.json`
+3. ستظهر جميع الطلبات
+
+---
+
+## 🧪 سيناريوهات الاختبار
+
+### السيناريو الأول: اختبار المعرفة الجغرافية
+
+**الهدف:** التحقق من معرفة النموذج بعاصمة فرنسا
+
+**الخطوات:**
+1. **Ask Question 1:** "ما هي عاصمة البلد الذي يحتوي على برج إيفل؟"
+2. **Evaluator 1:** تقييم هل الإجابة "باريس" صحيحة؟
+
+**النتيجة المتوقعة:** ✅ PASS
+
+---
+
+### السيناريو الثاني: اختبار الفهم السياقي
+
+**الهدف:** فحص قدرة النموذج على فهم الأوصاف
+
+**الخطوات:**
+1. **Ask Question 2:** "احكي قصة عن حيوان له أذنان مثلثتان ويموء"
+2. **Evaluator 2:** تقييم هل القصة عن "قطة"؟
+
+**النتيجة المتوقعة:** ✅ PASS
+
+---
+
+## 📊 كيفية التشغيل
+
+### الطريقة 1: تشغيل يدوي
+
+```
+Prompt 1 → Ask Question 1 → Evaluator 1
+Prompt 2 → Ask Question 2 → Evaluator 2
+```
+
+### الطريقة 2: تشغيل Collection كاملة
+
+1. انقر بزر الماوس الأيمن على الـ Collection
+2. اختر **Run collection**
+3. تأكد من اختيار الـ Environment الصحيح
+4. اضغط **Run**
+
+### الطريقة 3: Postman Monitor (اختياري)
+
+- أنشئ Monitor للـ Collection
+- حدد الجدول الزمني (يومي، أسبوعي، إلخ)
+- تتبع النتائج تلقائياً
+
+---
+
+## 🧩 بنية المشروع
+
+```
+QA-LLM/
+│
+├── Postman collection.json    # جميع الطلبات والاختبارات
+├── environment.json            # المتغيرات والـ API Key
+├── Recording-Demo-Video.mp4   # فيديو توضيحي
+└── README.md                  # هذا الملف
+```
+
+---
+
+## 🔧 التقنيات المستخدمة
+
+| التقنية | الاستخدام |
+|---------|-----------|
+| **Postman** | إدارة الطلبات والاختبارات |
+| **Gemini API** | نموذج اللغة الكبيرة |
+| **JavaScript** | كتابة اختبارات ما بعد الطلب |
+| **Environment Variables** | تخزين البيانات والنتائج |
+
+---
+
+## 📈 مثال على النتائج
+
+```javascript
+// نتائج الاختبارات
+✅ Status code is 200
+✅ Response has candidates array
+✅ Text content exists
+✅ Model answer stored
+✅ Evaluation result: PASS
+
+// إحصائيات
+Total Tests: 16
+Passed: 16 (100%)
+Failed: 0 (0%)
+```
+
+---
+
+## 🎓 ما تعلمته من هذا المشروع
+
+- اختبار APIs باستخدام Postman
+- كتابة Test Scripts بـ JavaScript
+- التعامل مع Environment Variables
+- أتمتة سير عمل الاختبارات
+- تقييم جودة مخرجات LLM
+- استخدام Postman Monitors
+
+---
+
+## 🔐 ملاحظات الأمان
+
+⚠️ **مهم جداً:**
+- **لا تشارك** الـ `GEMINI_API_KEY` علناً
+- استخدم `.gitignore` لاستبعاد الملفات الحساسة
+- استخدم **Postman Vault** لتخزين الـ API Keys بأمان
+
+---
+
+## 🚧 التحسينات المستقبلية
+
+- [ ] إضافة المزيد من سيناريوهات الاختبار
+- [ ] دعم نماذج LLM أخرى (GPT, Claude, إلخ)
+- [ ] تقارير HTML للنتائج
+- [ ] تكامل مع CI/CD Pipelines
+- [ ] Dashboard لعرض الإحصائيات
+
+---
+
+## 🤝 المساهمة
+
+المساهمات مرحب بها! إذا كان لديك اقتراحات:
+
+1. Fork المشروع
+2. أنشئ Branch جديد (`git checkout -b feature/AmazingFeature`)
+3. Commit التغييرات (`git commit -m 'Add some AmazingFeature'`)
+4. Push للـ Branch (`git push origin feature/AmazingFeature`)
+5. افتح Pull Request
+
+---
+
+## 📝 الترخيص
+
+هذا المشروع مفتوح المصدر تحت رخصة [MIT](LICENSE).
+
+---
+
+## 👤 المطور
+
+**Ahmad ELManaseer**
+
+- GitHub: [@Ahmad-ELManaseer03](https://github.com/Ahmad-ELManaseer03)
+- LinkedIn: www.linkedin.com/in/ahmad-elmanaseer03
+- Email: ahmad1manaseer@gmail.com
+
+---
+
+## ⭐ إذا أعجبك المشروع
+
+أعطه ⭐ على GitHub!
+
+---
+
+**📺 شاهد الفيديو التوضيحي:** [`Recording-Demo-Video.mp4`](Recording-Demo-Video.mp4)
+
+---
+
 <div align="center">
 
-# QA LLM Assignment · Gemini & Postman
-
-Automation mini-project for testing LLM responses using **Google Gemini API** and **Postman**.
+صُنع بـ ❤️ للمهتمين بـ QA و AI Testing
 
 </div>
-
----
-
-## ✨ Overview
-
-This repository contains a small QA automation project that:
-
-- Sends predefined prompts to a Large Language Model (**Gemini**)
-- Stores the model responses in Postman **environment variables**
-- Uses the LLM itself to evaluate its answers as `PASS` or `FAIL`
-- Can be run manually, as a full collection, or via a Postman Monitor
-
-The focus is on **QA mindset** and **automation workflow**, not on building a backend application.
-
----
-
-## ⚙️ Tech Stack
-
-- **Postman** – requests, collections, environments, and test scripts  
-- **Google Gemini API** – text generation and evaluation  
-- **JavaScript (Postman tests)** – parsing responses and setting variables  
-
----
-
-## 📁 Project Structure
-
-| File                         | Type        | Description                                             |
-|------------------------------|------------|---------------------------------------------------------|
-| `Postman collection.json`    | Collection | All requests for prompts and evaluators                 |
-| `environment,.json`          | Environment| Environment variables (API key, model answers, results) |
-
----
-
-## 🧠 Flows & Scenarios
-
-The collection is organized into two main flows:
-
-### 1. Prompt 1 – Capital City Check
-
-**Goal:** Verify that the model knows the capital city where the Eiffel Tower is located.
-
-Typical structure:
-
-1. **Ask Question 1**  
-   - Prompt:  
-     > Which city is the capital of the country where the Eiffel Tower is located?  
-   - Sends the request to Gemini.  
-   - Extracts the model answer from the JSON response.  
-   - Stores the answer in an environment variable (for example: `model_answer_1`).
-
-2. **Evaluator 1**  
-   - Sends a second request to Gemini.  
-   - Asks Gemini to evaluate the answer from `model_answer_1`.  
-   - Expects a short decision such as `PASS` or `FAIL`.  
-   - Stores the evaluation result (for example: `q1_answer`).
-
----
-
-### 2. Prompt 2 – Story About a Cat
-
-**Goal:** Check whether the model can generate a story about a cat based on a description.
-
-Typical structure:
-
-1. **Ask Question 2**  
-   - Prompt:  
-     > Tell me a story of an animal that has ears in shape of a triangle and does meow.  
-   - Sends the request to Gemini.  
-   - Extracts the story text.  
-   - Stores it in environment variables (for example: `model_answer_2` and an escaped version like `q2_answer_escaped`).
-
-2. **Evaluator 2**  
-   - Sends another request to Gemini.  
-   - Asks Gemini to evaluate whether the story clearly refers to a **cat**.  
-   - Expects a decision such as `PASS` or `FAIL`.  
-   - Stores the evaluation result (for example: `q2_answer`).
-
----
-
-## 🚀 Setup
-
-### 1. Import the Environment
-
-1. Open **Postman**.
-2. Go to **Environments** → **Import**.
-3. Select `environment,.json`.
-4. Open the imported environment and set:
-   - `GEMINI_API_KEY` in the **Current Value** field.
-5. Save the environment.
-6. Select this environment from the top-right dropdown in Postman.
-
----
-
-### 2. Import the Collection
-
-1. Go to **Collections** → **Import**.
-2. Select `Postman collection.json`.
-3. Confirm that the collection is visible with all requests:
-   - `Prompt 1 / Ask Question 1`
-   - `Prompt 1 / Evaluator 1`
-   - `Prompt 2 / Ask Question 2`
-   - `Prompt 2 / Evaluator 2`
-
----
-
-## ▶️ How to Run
-
-### Option A – Run Requests Manually
-
-1. Select the correct environment.
-2. Send the requests in this order:
-   1. `Prompt 1 / Ask Question 1`
-   2. `Prompt 1 / Evaluator 1`
-   3. `Prompt 2 / Ask Question 2`
-   4. `Prompt 2 / Evaluator 2`
-3. Open the **Test Results** tab for each request.
-4. Check:
-   - Status code assertions  
-   - Text parsing assertions  
-   - That the environment variables are populated with:
-     - Model answers  
-     - Evaluation results (`PASS` / `FAIL`)
-
----
-
-### Option B – Run the Whole Collection
-
-1. Right-click the collection → **Run collection**.
-2. Select the same environment.
-3. Start the run.
-4. Review:
-   - Number of requests executed  
-   - Number of tests passed  
-
----
-
-### Option C – Use a Monitor (Optional)
-
-You can attach this collection to a Postman Monitor to:
-
-- Run it on a schedule (for example: hourly/daily)
-- Track how the model’s behavior changes over time
-- Keep a record of responses and evaluations
-
----
-
-## 🎯 Learning Outcomes
-
-By using this repository, you demonstrate:
-
-- Working with an **LLM API** in a QA context
-- Structuring **Postman collections** and **environments**
-- Writing **Postman test scripts** to:
-  - Validate HTTP responses
-  - Parse JSON safely
-  - Store and reuse values through environment variables
-- Designing a simple **LLM-based evaluation loop**:
-  - Prompt → Model answer → Evaluator → PASS/FAIL
